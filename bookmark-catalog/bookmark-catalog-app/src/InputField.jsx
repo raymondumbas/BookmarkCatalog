@@ -1,7 +1,7 @@
 /*
     User Input with formatted label and box
  */
-function Input(props) {
+function InputField(props) {
     
     return (
         <>
@@ -17,4 +17,4 @@ function Input(props) {
     );
 }
   
-  export default Input;
+  export default InputField;
