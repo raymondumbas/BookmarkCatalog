@@ -20,16 +20,25 @@ function NewBookmarkForm(props) {
   const [selectedCategoryLabels, setSelectedCategoryLabels] = useState([]);
 
   useEffect(()=>{
-    getCategoryLabels();
-  },[]);
+    if(props.category){
+      
+      getCategoryLabels();
 
-  async function getCategoryLabels(){    
-    const {data} = await supabase
+    }
+  },[props.category]);
+
+  async function getCategoryLabels(){   
+  
+    const {data,error} = await supabase
     .from("default_categories")
     .select()
     .eq("name", props.category);
-    
-    setSelectedCategoryLabels(data[0].details);
+    if(error){
+      console.log(error)
+    }
+    else{
+      setSelectedCategoryLabels(data[0].details);
+    }
   }
 
   const handleChange = (e) => {
@@ -41,9 +50,6 @@ function NewBookmarkForm(props) {
     e.preventDefault();
     console.log("Submitted Data:", formData);
   };
-
-  // Get all labels for each detail for corresponding category
-  let formFieldsElements = [];  
 
   return (
     <form onSubmit={handleSubmit}>

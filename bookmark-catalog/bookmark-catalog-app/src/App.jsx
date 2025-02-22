@@ -1,11 +1,11 @@
 import './App.css'
-import NewBookmarkForm from './NewBookmarkForm.jsx'
+import BookmarkCatalog from './BookmarkCatalog'
 function App() {
   const testLabels = ["restaurants", "movies", "comics"]
   return (
     <>
       <div>
-        <NewBookmarkForm category = "eateries" />
+        <BookmarkCatalog/>
       </div>
     </>
   )
