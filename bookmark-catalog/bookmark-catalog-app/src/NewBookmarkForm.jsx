@@ -36,8 +36,7 @@ function NewBookmarkForm(props) {
     //  Default Category
     if(default_categories.categoryList.includes(props.category)){
 
-      console.log(`Default Category Selected: ${props.category}`)
-      setSelectedCategoryLabels(default_categories[props.category]);
+      setSelectedCategoryLabels(default_categories[props.category].description);
 
     }
 
