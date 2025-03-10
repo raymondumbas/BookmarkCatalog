@@ -1,4 +1,5 @@
 import InputField from "./InputField.jsx"
+import default_categories from "./default_categories.json"
 import { createClient } from "@supabase/supabase-js";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -25,30 +26,44 @@ function NewBookmarkForm(props) {
       getCategoryLabels();
 
     }
+    else{
+      setSelectedCategoryLabels([]);
+    }
   },[props.category]);
 
   async function getCategoryLabels(){   
-  
-    const {data,error} = await supabase
-    .from("default_categories")
-    .select()
-    .eq("name", props.category);
-    if(error){
-      console.log(error)
+
+    //  Default Category
+    if(default_categories.categoryList.includes(props.category)){
+
+      console.log(`Default Category Selected: ${props.category}`)
+      setSelectedCategoryLabels(default_categories[props.category]);
+
     }
+
+    // Custom Category
     else{
-      setSelectedCategoryLabels(data[0].details);
+      // TO DO
     }
-  }
+
+}
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value }); // Retains other fields
   };
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e){
     e.preventDefault();
-    console.log("Submitted Data:", formData);
+
+    // Insert into bookmark table
+    const bookmarksData = {
+      name: data[0].name,
+      user_id: "-1"
+    }
+    const {data, error} = await supabase.from("bookmarks").insert(formData).select();
+
+    // Insert into category specific table
   };
 
   return (
