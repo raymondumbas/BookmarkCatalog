@@ -1,14 +1,15 @@
-import './App.css'
-import BookmarkCatalog from './BookmarkCatalog'
+// src/App.jsx
+import React from 'react';
+import { AuthProvider } from './context/AuthContext.jsx';
+import HomePage from './components/HomePage.jsx'
+
 function App() {
-  const testLabels = ["restaurants", "movies", "comics"]
   return (
-    <>
-      <div>
-        <BookmarkCatalog/>
-      </div>
-    </>
-  )
+    <AuthProvider>
+      <HomePage/>
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
+
